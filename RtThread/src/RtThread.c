@@ -15,7 +15,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
+#include <errno.h>
 
+
+#define handle_error_en(en, msg) \
+               do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 long getPthredSelf() {
 	long y = (long) pthread_self();
 	printf("get_pthread from JNI : %ld\n", y);

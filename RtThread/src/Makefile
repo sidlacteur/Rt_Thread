@@ -13,6 +13,6 @@ libJNITest.so : RtThread.o
 clean :
 	rm -rf libJNITest.so
 	rm -rf *.o 
-
+	rm -rf *~ 
 
 
