@@ -6,25 +6,25 @@ import RtThread.RtJNI;
 import ThreadTest.ThreadTest;
 
 public class RtMgr {
+	/**
+	 * RtMgr : Manager of rt_thread
+	 * 
+	 * threadSet : set of rt_thread with them rt_thread
+	 * 
+	 */
 	private static HashMap<ThreadTest, Parameters> threadSet = new HashMap<ThreadTest, Parameters>();
 
 	public static Parameters getParam(ThreadTest t) {
 		return threadSet.get(t);
 	}
-	
-	
 
 	public static HashMap<ThreadTest, Parameters> getThreadSet() {
 		return threadSet;
 	}
 
-
-
 	public static void setThreadSet(HashMap<ThreadTest, Parameters> threadSet) {
 		RtMgr.threadSet = threadSet;
 	}
-
-
 
 	public static long getPthreadOfCurrentThread() {
 		return RtJNI.getPthreadSelf();
@@ -32,10 +32,9 @@ public class RtMgr {
 
 	public static void setSchedThreadParams(ThreadTest t, Parameters param) {
 
-		/*
+		/**
 		 * if t is in hash map, and has already started, call JNI to change the
 		 * parameters
-		 *
 		 */
 
 		if (isRealTime(t)) {
@@ -51,9 +50,10 @@ public class RtMgr {
 
 			RtJNI.setThreadParameters(pthreadId, param.priority, param.policy, param.affinity);
 
-		} /*
-			 * else, just put the threrad parameters into the hash map
-			 */
+		}
+		/**
+		 * else, just put the threrad parameters into the hash map
+		 */
 		else {
 			System.out.println("Thread: " + Thread.currentThread() + ": is not real-time");
 

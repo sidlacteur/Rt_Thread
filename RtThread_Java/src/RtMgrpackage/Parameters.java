@@ -1,6 +1,18 @@
 package RtMgrpackage;
 
 public class Parameters {
+	
+	/**
+	 * rt_parameters : 
+	 * 			
+	 * 			affinity : (0 - CPU's number) in which CPU we affect our thread
+	 * 			priority : (0 - 99) rt_priority
+	 * 			policy   : (SCHED_RR , SCHED_FIFO) rt_policy
+	 * 			started, finished : boolean variable, to determinate if thread started or finished
+	 * 			pthreadId:  it's pthread_id of thread 
+	 * 
+	 */
+
 
 	int affinity;
 	int priority;

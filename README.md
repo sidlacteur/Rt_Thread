@@ -29,7 +29,8 @@ _ add the containing directory to LD_LIBRARY_PATH before launching the applicati
 
 # Usage
 
-Explain how to use the library
+how to use the library
+
 With our library, you can create java's thread with real time scheduling policy, change them native priorite, affect each thread to specific core of CPU. 
 
 Java directory contain :
@@ -44,7 +45,7 @@ Java directory contain :
 		     _ Scenario: differents scenario testing.
 
 
-Put a simple example of code (Main function) to create two periodic threads
+simple example of code (Main function) to create two periodic threads
 
 		// creating thread
 		ThreadTest t1 = new ThreadTest(1)
@@ -59,7 +60,7 @@ Put a simple example of code (Main function) to create two periodic threads
 		RtMgr.startAllThreads()
 # Doc
 
-  Explain how to generate the documentation with Javadoc
+   The documentation with Javadoc can be found in doc/
 
 
 ----

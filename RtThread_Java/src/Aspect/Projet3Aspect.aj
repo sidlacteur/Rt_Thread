@@ -7,13 +7,18 @@ import ThreadTest.ThreadTest;
 public aspect Projet3Aspect {
 
 	/**
-	 * set thread parameters to all rt_thread before them start execution
+	 * set thread parameters to all rt_thread before his start execution
 	 */
 
 	pointcut ThreadTarget() : execution(void Runnable+.run());
 
 	before() : ThreadTarget() {
 		ThreadTest me = (ThreadTest) Thread.currentThread();
+
+		/**
+		 * if thread are contained in rt_thread_map than we can change him to
+		 * rt_thread
+		 */
 
 		if (RtMgr.getThreadSet().containsKey(me)) {
 			long pthreadId = RtJNI.getPthreadSelf();
@@ -40,6 +45,10 @@ public aspect Projet3Aspect {
 	after() : ThreadTarget() {
 
 		Thread me = Thread.currentThread();
+
+		/**
+		 * after his execution, we initialize his rt_parameters
+		 */
 
 		if (RtMgr.getThreadSet().containsKey(me)) {
 			RtMgr.getThreadSet().get(me).setStarted(false);

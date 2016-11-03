@@ -4,9 +4,9 @@ import RtMgrpackage.Parameters;
 import RtMgrpackage.RtMgr;
 import ThreadTest.ThreadTest;
 
-public class Scenario_ParamError {
+public class ScenarioWithDiffPrio {
 
-	public Scenario_ParamError() {
+	public ScenarioWithDiffPrio() {
 
 		/**
 		 * declaration of threads
@@ -17,20 +17,26 @@ public class Scenario_ParamError {
 		ThreadTest t3 = new ThreadTest(3);
 
 		/**
+		 * 
 		 * get pthread_self of main thread
+		 * 
 		 */
 
 		System.out.println("main pthread_self " + RtMgr.getPthreadOfCurrentThread());
 
 		/**
-		 * set thread parameters
+		 * 
+		 * set thread parameters HIGH, MEDIUM, LOW
+		 * 
 		 */
 
-		Parameters p1 = new Parameters(1, 10, 1);
-		Parameters p2 = new Parameters(0, 20, 0);
+		Parameters p1 = new Parameters(0, 2, 0);
+		Parameters p2 = new Parameters(0, 40, 0);
+		Parameters p3 = new Parameters(0, 99, 0);
 
 		RtMgr.setSchedThreadParams(t1, p1);
 		RtMgr.setSchedThreadParams(t2, p2);
+		RtMgr.setSchedThreadParams(t3, p3);
 
 		/**
 		 * start all rt_threads
@@ -39,26 +45,16 @@ public class Scenario_ParamError {
 		RtMgr.startAllThreads();
 
 		/**
-		 * start normal thread
+		 * set other parameters for existing threads
+		 * 
 		 */
+		Parameters p4 = new Parameters(0, 1, 0);
+		Parameters p5 = new Parameters(0, 40, 0);
+		Parameters p6 = new Parameters(0, 99, 0);
 
-		t3.start();
-
-		/**
-		 * set other parameters for existing threads to generate runtime
-		 * exception
-		 */
-		
-		p1.setAffinity(0);
-		p1.setPriority(26);
-		p1.setPolicy(0);
-
-		p2.setAffinity(1);
-		p2.setPriority(56);
-		p2.setPolicy(1);
-
-		RtMgr.setSchedThreadParams(t1, p1);
-		RtMgr.setSchedThreadParams(t2, p2);
+		RtMgr.setSchedThreadParams(t1, p4);
+		RtMgr.setSchedThreadParams(t2, p5);
+		RtMgr.setSchedThreadParams(t3, p6);
 
 		/**
 		 * join all threads to main thread
@@ -68,6 +64,7 @@ public class Scenario_ParamError {
 			t1.join();
 			t2.join();
 			t3.join();
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
