@@ -35,9 +35,9 @@ With our library, you can create java's thread with real time scheduling policy,
 
 Java directory contain :
 
-	_ package :  _ Aspect : - set priority before run rt_thread and mark that rt_thread was started.
+	_ package :  _ Aspect : - set priority before run rt_thread and that set variable started to true.
 				- test correctness of user's parameters : priority(1-99), affinity(number of CPU, in our case 1-0), policy(0 for SCHED_RR, and 1 for 										SCHED_FIFO).
-				- reset all the parameters and mark that rt_thread was finished.
+				- reset all the parameters and than set variable finished to true.
 		     _ RtMgrPackage : - Parameters.java contains rt_thread parameters : pthread_id, affinity, SCHEd_policy, priority.
 				      - RtMgr.java it manage rt_thread, for example : get/set map that contain rt_thread with them Parameters, start all rt_threads, add new rt_thread to the map, affect 											      Parameters to specific rt_thread, test if thread is rt_thread or not.
 		     _ RtThread: RtThread.java contains declarationof all native methodes. 
