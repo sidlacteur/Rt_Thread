@@ -31,7 +31,7 @@ _ add the containing directory to LD_LIBRARY_PATH before launching the applicati
 
 how to use the library
 
-With our library, you can create java's thread with real time scheduling policy, change them native priorite, affect each thread to specific core of CPU. 
+With our library, you can create java's thread with real time scheduling policy, change their native priorite, affect each thread to specific core of CPU. 
 
 Java directory contain :
 
