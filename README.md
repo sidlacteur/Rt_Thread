@@ -27,6 +27,9 @@ _ add the containing directory to LD_LIBRARY_PATH before launching the applicati
 		Use java -XshowSettings:properties to show the java.library.path (and others) value.
 
 
+or launch script of different scenario 
+
+
 # Usage
 
 how to use the library
