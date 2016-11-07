@@ -14,8 +14,9 @@ public class RtMgr {
 	private static HashMap<Thread, Parameters> threadSet = new HashMap<Thread, Parameters>();
 
 	/**
-	 * Returns the scheduling parameters for thread t, 
-	 * or null if the thread is not real-time.
+	 * Returns the scheduling parameters for thread t, or null if the thread is
+	 * not real-time.
+	 * 
 	 * @param t
 	 * @return
 	 */
@@ -23,16 +24,18 @@ public class RtMgr {
 		return threadSet.get(t);
 	}
 
-    /** 
-     * Return the pthread id of the current thread as a long.
-     * @return
-     */
+	/**
+	 * Return the pthread id of the current thread as a long.
+	 * 
+	 * @return
+	 */
 	public static long getPthreadOfCurrentThread() {
 		return RtJNI.getPthreadSelf();
 	}
 
-	/** 
+	/**
 	 * Returns the process ID of the current thread, as a long
+	 * 
 	 * @return
 	 */
 	public static long getPidCurrentThread() {
@@ -50,12 +53,12 @@ public class RtMgr {
 			System.out.println(p.toString());
 
 			/* TODO: test input parameters */
-			
+
 			long pthreadId = getParam(t).getPthreadId();
 			p.setAffinity(param.affinity);
 			p.setPolicy(param.policy);
 			p.setPriority(param.priority);
-			
+
 			RtJNI.setThreadParameters(pthreadId, param.priority, param.policy, param.affinity);
 		}
 		/**
@@ -69,10 +72,10 @@ public class RtMgr {
 		}
 	}
 
-	/** 
-	 * TODO: (LP) Starting all threads at the same time is helpful for the moment, 
-	 * but at some point we should allow a specific group of threads to be 
-	 * activated together 
+	/**
+	 * TODO: (LP) Starting all threads at the same time is helpful for the
+	 * moment, but at some point we should allow a specific group of threads to
+	 * be activated together
 	 */
 	public static void startAllThreads() {
 		for (Thread Threads : threadSet.keySet()) {
@@ -82,6 +85,7 @@ public class RtMgr {
 
 	/**
 	 * Tells us if a certain thread has real-time parameters or not
+	 * 
 	 * @param t
 	 * @return
 	 */
@@ -92,13 +96,23 @@ public class RtMgr {
 			return true;
 		}
 	}
-	
+
 	public synchronized static boolean isManaged(Thread t) {
 		return threadSet.containsKey(t);
 	}
-	
+
 	/**
-	 * TODO: Searches a thread with the required Pid
+	 *  Searches a thread with the required Pid
 	 */
-	
+
+	public static thread getThreadFromPid(long pid) {
+		for (Thread Threads : threadSet.keySet()) {
+			if (getParam(Threads).getPid() == pid)
+				return Threads;
+			else
+				return 0;
+
+		}
+	}
+
 }

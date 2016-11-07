@@ -3,20 +3,41 @@ package RtMgrpackage;
 public class Parameters {
 
 	/**
-	 * rt_parameters :
-	 * 
-	 * affinity : (0 - CPU's number) in which CPU we affect our thread priority
-	 * : (0 - 99) rt_priority policy : (SCHED_RR , SCHED_FIFO) rt_policy
-	 * started, finished : boolean variable, to determinate if thread started or
-	 * finished pthreadId: it's pthread_id of thread
-	 * 
+	 * real-time parameters
 	 */
 
+	/**
+	 * affinity : (0 - CPU's number) in which CPU we affect our thread
+	 */
 	int affinity;
+
+	/**
+	 * real-time priority priority its between (0 - 99)
+	 */
 	int priority;
+
+	/**
+	 * real-time policy : (SCHED_RR , SCHED_FIFO)
+	 * 
+	 */
 	int policy;
+	/**
+	 * 
+	 * started, finished : boolean variable, to determinate if thread started or
+	 * finished 
+	 * 
+	 */
 	boolean started;
+	boolean finished;
+	
+	/**
+	 * pthreadId: it's pthread_id of thread
+	 */
 	long pthreadId;
+
+	/**
+	 * pid: it's process id of thread
+	 */
 	long pid;
 
 	public long getPid() {
@@ -27,7 +48,6 @@ public class Parameters {
 		this.pid = pid;
 	}
 
-	boolean finished;
 
 	public int getAffinity() {
 		return affinity;
