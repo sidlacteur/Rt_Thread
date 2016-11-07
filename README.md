@@ -28,15 +28,15 @@ http://www.eclipse.org/ajdt/downloads/index.php
 `rt-thread-c/src`. You can compile it with CDT, _or_ you can use
 the instructions below:
 
-** Open a terminal in that directory
+	* Open a terminal in that directory
 
-** Edit the `Makefile`, and change the value of variable `JDK_PATH` to
-   point to the place where your JDK is installed.
+	* Edit the `Makefile`, and change the value of variable `JDK_PATH` to
+	   point to the place where your JDK is installed.
 
-** run `make`
+	* run `make`
 	
-* Then, to compile the library, open Eclipse IDE and import a new
-project with root directory `rt-thread-java`. Build should be automatic
+		* Then, to compile the library, open Eclipse IDE and import a new
+		project with root directory `rt-thread-java`. Build should be automatic
 
 ## Executing the tests from the command line
 
