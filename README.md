@@ -53,32 +53,32 @@ Java directory contains
 
 * Aspect package
 
-** It permits to set priority after starting the thread. It intercepts
-   the `run()` method of the Thread class, and invokes the JNI method
-   to change the thread priority.
+ 	* It permits to set priority after starting the thread. It intercepts
+	the `run()` method of the Thread class, and invokes the JNI method
+   	to change the thread priority.
 
-** It checks the correctness of user's parameters : priority(1-99),
-   affinity(number of CPU, in our case 1-0), policy(0 for `SCHED_RR`,
-   and 1 for `SCHED_FIFO`).
+	* It checks the correctness of user's parameters : priority(1-99),
+	affinity(number of CPU, in our case 1-0), policy(0 for `SCHED_RR`,
+   	and 1 for `SCHED_FIFO`).
 	
-** It resets all the parameters and then set variable finished to true
-   when the Threads completes by intercepting the completion of the
-   `run()` method.
+	* It resets all the parameters and then set variable finished to true
+   	when the Threads completes by intercepting the completion of the
+   	`run()` method.
 
 * RtMgrPackage
 
-** Parameters.java contains the thread parameters : `pthread_id`,
+	* Parameters.java contains the thread parameters : `pthread_id`,
 	`affinity`, `sched_policy`, `priority`.
 
-** RtMgr.java manages the java thread with a hash map that links a
-java Thread with its real-time parameters. In addition, it can start
-all threads.  It is possible to add a new thread to the map, affect
-the parameters to a specific thread, test if a thread has real-time
-parameters or not.
+	* RtMgr.java manages the java thread with a hash map that links a
+	java Thread with its real-time parameters. In addition, it can start
+	all threads.  It is possible to add a new thread to the map, affect
+	the parameters to a specific thread, test if a thread has real-time
+	parameters or not.
 
-** RtThread.java contains the declaration of all native methodes.
+	* RtThread.java contains the declaration of all native methodes.
 
-** Scenario: differents scenario testing.
+	* Scenario: differents scenario testing.
 
 
 A simple example of code (Main function) to create two periodic threads:
