@@ -1,54 +1,87 @@
-# TITLE: 
-	rt_Thread for JAVA Application
+# Rt_Thread for JAVA Applications
 
-# Author: 
-	Y.Sidlakhdar & G.Lipari
+- Authors: Y. Sidlakhdar & G. Lipari
 
+This project provides a library for Real-Time programming in Java. It
+is an interface towards POSIX threads in Linux. For the moment it
+is not portable to other operating systems, it can only be used on Linux.
+
+The library provides a JNI interface to POSIX threads, and it uses
+Aspect Oriented Programming to implement hooks to Java Thread class
+methods, so that the use of this library is transparent to the JVM. 
+	
 # Compile and Install
 
-	_ run Makefile to generate JNI lib.	
+## Prerequisites
 
+To compile the library you need
+- Eclipse IDE
 
-## Eclipse
+- AspectJ. You can download the plug-in for your version of Eclipse from here:
+http://www.eclipse.org/ajdt/downloads/index.php
 
-You need to add : 
-		 CDT plug-in for C developement.
-		 AspectJ plug-in for Aspect programation.	
+- (Optional) CDT for compiling the JNI library 
 
-	than run main.java with arguments: -Djava.library.path="${$WORKSPACE_PATH:/RtThread/src/}".
+## Compilation
 
+* Let us first compile the JNI code. You will find it in directory
+`rt-thread-c/src`. You can compile it with CDT, _or_ you can use
+the instructions below:
 
-## Command line
+** Open a terminal in that directory
 
-_ add the containing directory to LD_LIBRARY_PATH before launching the application
+** Edit the `Makefile`, and change the value of variable `JDK_PATH` to
+   point to the place where your JDK is installed.
 
-       or run this command: export LD_LIBRARY_PATH = $LD_LIBRARY_PATH:/some/pathOfContainingDirectory
+** run `make`
+	
+* Then, to compile the library, open Eclipse IDE and import a new
+project with root directory `rt-thread-java`. Build should be automatic
 
-		Use java -XshowSettings:properties to show the java.library.path (and others) value.
+## Executing the tests from the command line
 
-
-or launch script of different scenario 
-
+To execute the tests from the terminal, execute the script `test.sh` in
+directory `test-rt-lib` as superuser. 
 
 # Usage
 
-how to use the library
+With our library, you can create java's thread with real time
+scheduling policy, change their native priority, affect each thread to
+a specific core of CPU.
 
-With our library, you can create java's thread with real time scheduling policy, change their native priorite, affect each thread to specific core of CPU. 
+Java directory contains
 
-Java directory contain :
+* Aspect package
 
-	_ package :  _ Aspect : - set priority before run rt_thread and that set variable started to true.
-				- test correctness of user's parameters : priority(1-99), affinity(number of CPU, in our case 1-0), policy(0 for SCHED_RR, and 1 for 										SCHED_FIFO).
-				- reset all the parameters and than set variable finished to true.
-		     _ RtMgrPackage : - Parameters.java contains rt_thread parameters : pthread_id, affinity, SCHEd_policy, priority.
-				      - RtMgr.java it manage rt_thread, for example : get/set map that contain rt_thread with them Parameters, start all rt_threads, add new rt_thread to the map, affect 											      Parameters to specific rt_thread, test if thread is rt_thread or not.
-		     _ RtThread: RtThread.java contains declarationof all native methodes. 
+** It permits to set priority after starting the thread. It intercepts
+   the `run()` method of the Thread class, and invokes the JNI method
+   to change the thread priority.
 
-		     _ Scenario: differents scenario testing.
+** It checks the correctness of user's parameters : priority(1-99),
+   affinity(number of CPU, in our case 1-0), policy(0 for `SCHED_RR`,
+   and 1 for `SCHED_FIFO`).
+	
+** It resets all the parameters and then set variable finished to true
+   when the Threads completes by intercepting the completion of the
+   `run()` method.
+
+* RtMgrPackage
+
+** Parameters.java contains the thread parameters : `pthread_id`,
+	`affinity`, `sched_policy`, `priority`.
+
+** RtMgr.java manages the java thread with a hash map that links a
+java Thread with its real-time parameters. In addition, it can start
+all threads.  It is possible to add a new thread to the map, affect
+the parameters to a specific thread, test if a thread has real-time
+parameters or not.
+
+** RtThread.java contains the declaration of all native methodes.
+
+** Scenario: differents scenario testing.
 
 
-simple example of code (Main function) to create two periodic threads
+A simple example of code (Main function) to create two periodic threads:
 
 		// creating thread
 		ThreadTest t1 = new ThreadTest(1)
@@ -61,7 +94,8 @@ simple example of code (Main function) to create two periodic threads
 
 		// Start rt_thread
 		RtMgr.startAllThreads()
-# Doc
+
+# Documentation
 
    The documentation with Javadoc can be found in doc/
 

@@ -1,5 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -fPIC -I/usr/jdk/include/ -I/usr/jdk/include/linux/
+JDK_PATH=/usr/lib/jvm/java-8-openjdk-amd64
+
+CFLAGS = -Wall -fPIC -I$(JDK_PATH)/include -I$(JDK_PATH)/include/linux
 LDFLAGS = -lpthread
 
 all : libJNITest.so
