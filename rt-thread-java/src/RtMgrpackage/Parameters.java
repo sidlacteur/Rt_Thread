@@ -83,8 +83,8 @@ public class Parameters {
 				+ started + ", pthreadId=" + pthreadId + ", pid=" + pid + ", finished=" + finished + "]";
 	}
 
-	public Parameters(int affinty, int priority, int policy) {
-		this.affinity = affinty;
+	public Parameters(int affinity, int priority, int policy) {
+		this.affinity = affinity;
 		this.priority = priority;
 		this.policy = policy;
 		this.finished = false;
