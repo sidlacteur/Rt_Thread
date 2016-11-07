@@ -82,7 +82,7 @@ Java directory contains
 
 
 A simple example of code (Main function) to create two periodic threads:
-
+```java
 		// creating thread
 		ThreadTest t1 = new ThreadTest(1)
 
@@ -94,7 +94,7 @@ A simple example of code (Main function) to create two periodic threads:
 
 		// Start rt_thread
 		RtMgr.startAllThreads()
-
+```
 # Documentation
 
    The documentation with Javadoc can be found in doc/
