@@ -4,7 +4,7 @@ import RtMgrpackage.RtMgr;
 import RtThread.RtJNI;
 import ThreadTest.ThreadTest;
 
-public aspect Projet3Aspect {
+public aspect ThreadAspect {
 
 	/**
 	 * set thread parameters to all rt_thread before his start execution
@@ -20,7 +20,7 @@ public aspect Projet3Aspect {
 		 * rt_thread
 		 */
 
-		if (RtMgr.getThreadSet().containsKey(me)) {
+		if (RtMgr.isManaged(me)) {
 			long pthreadId = RtJNI.getPthreadSelf();
 			int priority = RtMgr.getParam(me).getPriority();
 			int policy = RtMgr.getParam(me).getPolicy();
@@ -31,7 +31,7 @@ public aspect Projet3Aspect {
 			RtMgr.getParam(me).setPid(RtMgr.getPidCurrentThread());
 			RtJNI.setThreadParameters(pthreadId, priority, policy, affinity);
 			System.out.println(
-					"Thread: " + me + " " + RtMgr.getThreadSet().get(me).toString() + " parameters set correctly");
+					"Thread: " + me + " " + RtMgr.getParam(me).toString() + " parameters set correctly");
 
 		} else {
 			System.out.println("Thread: " + Thread.currentThread() + ": is not real-time");
@@ -39,23 +39,22 @@ public aspect Projet3Aspect {
 	}
 
 	/**
-	 * reinitiate thread parameters after his execution
+	 * reset thread parameters after its execution
 	 */
-
 	after() : ThreadTarget() {
 
 		Thread me = Thread.currentThread();
 
 		/**
-		 * after his execution, we initialize his rt_parameters
+		 * after his execution, we reset its real-time parameters
 		 */
 
-		if (RtMgr.getThreadSet().containsKey(me)) {
-			RtMgr.getThreadSet().get(me).setStarted(false);
-			RtMgr.getThreadSet().get(me).setPthreadId(-1);
-			RtMgr.getThreadSet().get(me).setPid(-1);
-			RtMgr.getThreadSet().get(me).setFinished(true);
-			System.out.println("After Thread: " + me + " " + RtMgr.getThreadSet().get(me).toString());
+		if (RtMgr.isManaged(me)) {
+			RtMgr.getParam(me).setStarted(false);
+			/*RtMgr.getParam(me).setPthreadId(-1);
+			RtMgr.getParam(me).setPid(-1);*/
+			RtMgr.getParam(me).setFinished(true);
+			System.out.println("After Thread: " + me + " " + RtMgr.getParam(me).toString());
 
 		}
 

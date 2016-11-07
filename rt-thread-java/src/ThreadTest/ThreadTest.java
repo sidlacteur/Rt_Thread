@@ -21,7 +21,7 @@ public class ThreadTest extends Thread {
 				 * if current thread is in the map, returns scheduling
 				 * parameters
 				 */
-				if (RtMgr.getThreadSet().containsKey(this)) {
+				if (RtMgr.isManaged(this)) {
 					int prio = RtJNI.getThreadPriority(RtMgr.getParam(this).getPthreadId());
 					long pid = RtMgr.getParam(this).getPid();
 				
