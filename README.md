@@ -20,7 +20,7 @@ To compile the library you need
 - AspectJ. You can download the plug-in for your version of Eclipse from here:
 http://www.eclipse.org/ajdt/downloads/index.php
 
-- you have to download aspectj.jar from here : http://www.java2s.com/Code/Jar/a/Downloadaspectjweaverjar.html, and include it in the Java build Path of the project : test-rt-lib/
+- You have to download aspectj.jar from here : http://www.java2s.com/Code/Jar/a/Downloadaspectjweaverjar.html, and include it in the Java build Path of the project : test-rt-lib/
 
 - (Optional) CDT for compiling the JNI library 
 
