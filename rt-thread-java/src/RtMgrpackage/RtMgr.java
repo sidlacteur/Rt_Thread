@@ -102,17 +102,19 @@ public class RtMgr {
 	}
 
 	/**
-	 *  Searches a thread with the required Pid
+	 * Searches a thread with the required Pid
 	 */
 
-	public static thread getThreadFromPid(long pid) {
+	public static Thread getThreadFromPid(long pid) {
+		Thread t = null;
 		for (Thread Threads : threadSet.keySet()) {
 			if (getParam(Threads).getPid() == pid)
 				return Threads;
 			else
-				return 0;
+				return t;
 
 		}
+		return t;
 	}
 
 }
