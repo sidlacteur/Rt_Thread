@@ -71,17 +71,27 @@ JNIEXPORT jint JNICALL Java_RtThread_RtJNI_getThreadPolicy(JNIEnv *env,
 		jclass c, jlong pthreadId) {
 	int policy;
 	struct sched_param param;
-	int s = pthread_getschedparam(pthreadId, &policy, &param);
 
-	if (s != 0) {
-		handle_error_en(s, "pthread_getschedparam");
+	if(pthreadId != -1){
+
+		int s = pthread_getschedparam(pthreadId, &policy, &param);
+
+		if (s != 0) {
+			handle_error_en(s, "pthread_getschedparam");
+		}
+	}else {
+		printf("pthread_getschedparam(pthreadId) error :: pthreadId not initialized yet ");
+		return 0;
 	}
+
 
 	return policy;
 }
 
 JNIEXPORT jint JNICALL Java_RtThread_RtJNI_getThreadAffinity(JNIEnv *env,
 		jclass c, jlong pthreadId) {
+
+	if(pthreadId != -1){
 	int j = 0;
 	cpu_set_t cpuset;
 	CPU_ZERO(&cpuset);
@@ -96,11 +106,18 @@ JNIEXPORT jint JNICALL Java_RtThread_RtJNI_getThreadAffinity(JNIEnv *env,
 			return j;
 		}
 	}
-	return 0;
+	return 0;}
+	else {
+		printf("pthread_getaffinity_np(pthreadId) error :: pthreadId not initialized yet ");
+		return 0;
+		}
 }
 
 JNIEXPORT jint JNICALL Java_RtThread_RtJNI_getThreadPriority(JNIEnv *env,
 		jclass c, jlong pthreadId) {
+
+if(pthreadId != -1){
+
 	int y;
 	struct sched_param param;
 
@@ -112,6 +129,11 @@ JNIEXPORT jint JNICALL Java_RtThread_RtJNI_getThreadPriority(JNIEnv *env,
 
 	return param.sched_priority;
 }
+else {
+	printf("pthread_getschedparam(pthreadId) error :: pthreadId not initialized yet ");
+	return 0;
+}
+}
 
 /**
  *   policy == 1 for SCHED_FIFO  && policy == 0 for SCHED_RR
@@ -119,6 +141,7 @@ JNIEXPORT jint JNICALL Java_RtThread_RtJNI_getThreadPriority(JNIEnv *env,
 
 JNIEXPORT jint JNICALL Java_RtThread_RtJNI_setThreadParameters(JNIEnv *env,
 		jclass c, jlong pthreadId, jint priority, jint policy, jint affinity) {
+if(pthreadId != -1){
 
 	struct sched_param param;
 	param.sched_priority = priority;
@@ -149,5 +172,10 @@ JNIEXPORT jint JNICALL Java_RtThread_RtJNI_setThreadParameters(JNIEnv *env,
 		setAffinity(affinity);
 	}
 	return returnValue;
+}
+else {
+	printf("pthread_getschedparam(pthreadId) error :: pthreadId not initialized yet ");
+	return 0;
+}
 }
 
