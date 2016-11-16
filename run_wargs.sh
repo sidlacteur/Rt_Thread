@@ -1,0 +1,12 @@
+
+
+LD_LIBRARY_PATH='/home/emeraude/Rt_Thread/rt-thread-c/src'
+export LD_LIBRARY_PATH
+
+#export CLASSPATH=$CLASSPATH:/usr/share/java/liblttng-ust-agent.jar
+
+export ajrt=aspectj8/lib/aspectjrt.jar
+export ajwd=aspectj8/lib/aspectjweaver.jar
+export CLASSPATH="$ajwd:$ajrt"
+
+java -javaagent:$ajwd -classpath $ajwd:$ajrt:main_wout.jar Main.Main
