@@ -2,7 +2,6 @@ package Aspect;
 
 import RtMgrpackage.RtMgr;
 import RtThread.RtJNI;
-import ThreadTest.ThreadTest;
 
 public aspect ThreadAspect {
 
@@ -13,7 +12,7 @@ public aspect ThreadAspect {
 	pointcut ThreadTarget() : execution(void Runnable+.run());
 
 	before() : ThreadTarget() {
-		ThreadTest me = (ThreadTest) Thread.currentThread();
+		Thread me =  Thread.currentThread();
 
 		/**
 		 * if thread are contained in rt_thread_map than we can change him to

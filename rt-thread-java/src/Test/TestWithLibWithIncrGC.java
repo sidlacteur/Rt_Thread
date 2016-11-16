@@ -10,7 +10,7 @@ public class TestWithLibWithIncrGC {
 
 	static final int LOG2_N = 14;
 	static final int N = 1 << LOG2_N;
-	static final int K = 16; // Number of frames.
+	static final int K = 1000; // Number of frames.
 
 	public TestWithLibWithIncrGC() {
 
@@ -24,6 +24,7 @@ public class TestWithLibWithIncrGC {
 		FilePrinter filewriter = new FilePrinter();
 		long max = 0, sum = 0;
 		final int n = 1000;
+		String timeStirng = "";
 		for (int i = 0; i < n; i++) {
 			try {
 				Thread.sleep(5);
@@ -39,7 +40,8 @@ public class TestWithLibWithIncrGC {
 			}
 			sum += time;
 			double timeMillis = time / 1000000.0;
-			filewriter.fileprinter(timeMillis + "", "with_lib_incrGC");
+			timeStirng += timeMillis + "\n";
+			filewriter.fileprinter(timeStirng + "", "with_lib_incrGC_1000");
 
 		}
 		System.out.println("Maximum Execution Time: " + (max / 1000000.0) + " ms");

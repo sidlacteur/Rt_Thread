@@ -10,7 +10,7 @@ public class TestWithLibWithOutGC {
 
 	static final int LOG2_N = 14;
 	static final int N = 1 << LOG2_N;
-	static final int K = 16; // Number of frames.
+	static final int K = 1000; // Number of frames.
 
 	public TestWithLibWithOutGC() {
 
@@ -23,12 +23,12 @@ public class TestWithLibWithOutGC {
 		}
 		FilePrinter filewriter = new FilePrinter();
 		long max = 0, sum = 0;
+		String timeStirng = "";
 		final int n = 1000;
 		for (int i = 0; i < n; i++) {
 			try {
 				Thread.sleep(5);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} // To limit garbage flow.
 			long time = System.nanoTime();
@@ -40,7 +40,9 @@ public class TestWithLibWithOutGC {
 			}
 			sum += time;
 			double timeMillis = time / 1000000.0;
-			filewriter.fileprinter(timeMillis + "", "with_lib_woutGC");
+
+			timeStirng += timeMillis + "\n";
+			filewriter.fileprinter(timeStirng + "", "with_lib_woutGC_1000");
 		}
 		System.out.println("Maximum Execution Time: " + (max / 1000000.0) + " ms");
 		System.out.println("Average Execution Time: " + (sum / n / 1000000.0) + " ms");

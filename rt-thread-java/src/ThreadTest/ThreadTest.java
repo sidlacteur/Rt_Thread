@@ -2,6 +2,8 @@ package ThreadTest;
 
 import RtMgrpackage.RtMgr;
 import RtThread.RtJNI;
+import Test.TestWithLibWithIncrGC;
+import Test.TestWithLibWithOutArgs;
 
 public class ThreadTest extends Thread {
 
@@ -21,7 +23,7 @@ public class ThreadTest extends Thread {
 		 * put here your code to execute it.
 		 */
 
-	//	new TestWithLibWithIncrGC();
+		new TestWithLibWithOutArgs();
 
 
 		/**
