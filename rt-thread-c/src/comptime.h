@@ -2,7 +2,7 @@
  * comptime.h
  *
  *  Created on: 14 juin 2016
- *      Author: root
+ *      Author: Sidlacteur
  */
 
 #ifndef COMPTIME_H_
