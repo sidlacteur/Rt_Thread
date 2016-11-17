@@ -8,7 +8,7 @@ public class FilePrinter {
 
 		try {
 			PrintWriter writer = new PrintWriter(
-					"/home/emeraude/Dropbox/TravailStage2016/data_java_test/separated/data_rttask/data_" + name + ".txt", "UTF-8");
+					"../data_" + name + ".txt", "UTF-8");
 			writer.println(d);
 			writer.println("");
 			writer.close();
