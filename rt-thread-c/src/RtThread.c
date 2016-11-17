@@ -1,8 +1,8 @@
 /*
- * com_Ircica_emeraude_jni_RtThread.c
+ * RtThread.c
  *
  *  Created on: 6 novembre 2016
- *      Author: emeraude
+ *      Author: Sidlacteur
  */
 #define _GNU_SOURCE
 #include <stdio.h>

@@ -2,7 +2,7 @@
  * time.c
  *
  *  Created on: 14 juin 2016
- *      Author: root
+ *      Author: Sidlacteur
  */
 #include <stdio.h>
 #include <pthread.h>
