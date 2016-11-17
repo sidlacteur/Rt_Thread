@@ -20,7 +20,7 @@ To compile the library you need
 - AspectJ. You can download the plug-in for your version of Eclipse from here:
 http://www.eclipse.org/ajdt/downloads/index.php
 
-- You have to download aspectj.jar from here : http://www.java2s.com/Code/Jar/a/Downloadaspectjweaverjar.html, and include it in the Java build Path of the project : test-rt-lib/
+- You have to download aspectj.jar from here : http://www.java2s.com/Code/Jar/a/Downloadaspectjweaverjar.html, and include it in the Java build Path of the project : test-rt-lib/ or include `.jar` files from `aspectj/lib`. 
 
 - (Optional) CDT for compiling the JNI library 
 
@@ -42,8 +42,8 @@ the instructions below:
 
 ## Executing the tests from the command line
 
-To execute the tests from the terminal, execute the script `test.sh` in
-directory `test-rt-lib` as superuser. 
+To execute the tests from the terminal, execute one of scripts : `run_incr.sh`, `run_wargs.sh`or `run_wogc.sh` in
+directory `run` as superuser. 
 
 # Usage
 
