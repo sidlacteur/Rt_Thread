@@ -34,13 +34,9 @@ plot(x, hx, type="l", lty=2, xlab="Temps",
 
  l1<-max(res$Appearances)
  l2<-min(res$Appearances)
-d<-l2-l1
-d
-write.csv(res,"/home/emeraude/0.csv")
+
 res$Appearances<-(0.13*res$Appearances)/((l1-l2)+1)
-write.csv(res,"/home/emeraude/1.csv")
 par(new=TRUE)
-lapply(res,class)
 
 barplot(res$Appearances, names.arg=res$Class, xlab="",ylab="",yaxt='n',ylim=c(0,0.14))
 
