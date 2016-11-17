@@ -1,6 +1,7 @@
 package Test;
 
 import Printer.FilePrinter;
+import RtMgrpackage.RtMgr;
 
 /**
  * JavaWorld: Real-time Java Application Development For Multi-core Systems.
@@ -31,21 +32,22 @@ public class TestWithLibWithIncrGC {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} // To limit garbage flow.
-			long time = System.nanoTime();
+			long time = RtMgr.getClockTime(1);
 			fft(frames[i % K], results[i % K]);
-			time = System.nanoTime() - time;
-			// System.out.println(time / 1000000.0); // Milliseconds.
+			time = RtMgr.getSubOfTime(RtMgr.getClockTime(1), time);
+
 			if (time > max) {
 				max = time;
 			}
-			sum += time;
-			double timeMillis = time / 1000000.0;
+			sum = RtMgr.getAddOfTime(sum, time);
+			// sum += time;
+			double timeMillis = time;
 			timeStirng += timeMillis + "\n";
 			filewriter.fileprinter(timeStirng + "", "with_lib_incrGC_1000");
 
 		}
-		System.out.println("Maximum Execution Time: " + (max / 1000000.0) + " ms");
-		System.out.println("Average Execution Time: " + (sum / n / 1000000.0) + " ms");
+		System.out.println("Maximum Execution Time: " + (max) + " ms");
+		System.out.println("Average Execution Time: " + (sum / n) + " ms");
 	}
 
 	static void fft(Complex[] a, Complex[] A) {

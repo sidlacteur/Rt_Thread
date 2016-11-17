@@ -3,6 +3,7 @@ package RtMgrpackage;
 import java.util.HashMap;
 
 import RtThread.RtJNI;
+import period.PeriodJNI;
 
 public class RtMgr {
 	/**
@@ -116,5 +117,36 @@ public class RtMgr {
 		}
 		return t;
 	}
+
+	/***************************************************************************************************/
+
+	//
+
+	/**
+	 * 
+	 * @param unitTime
+	 * @return
+	 */
+	public synchronized static long getClockTime(int unitTime) {
+		return PeriodJNI.getClockTime(unitTime);
+	}
+
+	public synchronized static long getSubOfTime(long time1, long time2) {
+		return PeriodJNI.timesub(time1, time2);
+	}
+
+	public synchronized static long getAddOfTime(long time1, long time2) {
+		return PeriodJNI.timeadd(time1, time2);
+	}
+
+	public synchronized static void endOfInstance(long next) {
+		PeriodJNI.endInstance(next);
+	}
+
+	public synchronized static long getComparOfDL(long time1, long time2) {
+		return PeriodJNI.comDeadline(time1, time2);
+
+	}
+	
 
 }
