@@ -1,5 +1,5 @@
 
-LD_LIBRARY_PATH='/home/emeraude/Rt_Thread/rt-thread-c/src'
+LD_LIBRARY_PATH='../rt-thread-c/src'
 export LD_LIBRARY_PATH
 
 #export CLASSPATH=$CLASSPATH:/usr/share/java/liblttng-ust-agent.jar
