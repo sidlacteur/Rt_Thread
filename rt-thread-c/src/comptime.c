@@ -59,6 +59,12 @@ long gettime(int unit) {
 	return tspec_to(&t, unit);
 }
 
+long gettimeThread(int unit) {
+
+	tspec t;
+	clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t);
+	return tspec_to(&t, unit);
+}
 void mysleep_ms(long nsec) {
 	tspec t;
 

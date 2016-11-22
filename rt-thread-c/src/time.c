@@ -30,7 +30,12 @@ JNIEXPORT jlong JNICALL Java_period_PeriodJNI_comDeadline(JNIEnv *env,
 	/*return additinal time in long type*/
 	return ret;
 }
+JNIEXPORT jlong JNICALL Java_period_PeriodJNI_getExactClockTime
+  (JNIEnv  *env, jclass o, jint i)
+{
 
+	return gettimeThread(i);
+}
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_getClockTime(JNIEnv *env,
 		jobject o, jint i) {
 	return gettime(i);
