@@ -40,6 +40,6 @@ tspec tspec_add(const tspec *a, const tspec *b);
 long gettime(int unit);
 long gettimeThread(int unit);
 
-void mysleep_ms(long milisec);
+void mysleep_ms(long milisec,int unit);
 
 #endif /* COMPTIME_H_ */

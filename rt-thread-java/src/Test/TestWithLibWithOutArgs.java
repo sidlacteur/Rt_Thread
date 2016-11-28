@@ -23,6 +23,7 @@ public class TestWithLibWithOutArgs {
 			}
 		}
 		FilePrinter filewriter = new FilePrinter();
+		int unittime = 2;
 		long max = 0, sum = 0;
 		String timeStirng = "";
 		final int n = 1000;
@@ -32,22 +33,21 @@ public class TestWithLibWithOutArgs {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} // To limit garbage flow.
-			long time = RtMgr.getClockTime(1);
+			long time = RtMgr.getExactClockTime(unittime);
 			fft(frames[i % K], results[i % K]);
-			time = RtMgr.getSubOfTime(RtMgr.getClockTime(1), time);
+			time = RtMgr.getSubOfTime(RtMgr.getExactClockTime(unittime), time);
 
 			if (time > max) {
 				max = time;
 			}
 			sum = RtMgr.getAddOfTime(sum, time);
-			//sum += time;
-			double timeMillis = time;
+			// sum += time;
+			timeStirng += ((double) time / 1000) + "\n";
 
-			timeStirng += timeMillis + "\n";
 			filewriter.fileprinter(timeStirng + "", "with_lib_without_args_1000");
 		}
-		System.out.println("Maximum Execution Time: " + (max) + " ms");
-		System.out.println("Average Execution Time: " + (sum / n ) + " ms");
+		System.out.println("Maximum Execution Time: " + ((double)max/1000) + " ms");
+		System.out.println("Average Execution Time: " + ((double)sum / n/1000) + " ms");
 	}
 
 	static void fft(Complex[] a, Complex[] A) {

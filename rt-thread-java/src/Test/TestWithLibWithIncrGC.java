@@ -25,6 +25,7 @@ public class TestWithLibWithIncrGC {
 		FilePrinter filewriter = new FilePrinter();
 		long max = 0, sum = 0;
 		final int n = 1000;
+		int unittime = 2;
 		String timeStirng = "";
 		for (int i = 0; i < n; i++) {
 			try {
@@ -32,22 +33,22 @@ public class TestWithLibWithIncrGC {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} // To limit garbage flow.
-			long time = RtMgr.getClockTime(1);
+			long time = RtMgr.getExactClockTime(unittime);
 			fft(frames[i % K], results[i % K]);
-			time = RtMgr.getSubOfTime(RtMgr.getClockTime(1), time);
+			time = RtMgr.getSubOfTime(RtMgr.getExactClockTime(unittime), time);
 
 			if (time > max) {
 				max = time;
 			}
 			sum = RtMgr.getAddOfTime(sum, time);
 			// sum += time;
-			double timeMillis = time;
-			timeStirng += timeMillis + "\n";
-			filewriter.fileprinter(timeStirng + "", "with_lib_incrGC_1000");
+			timeStirng += ((double) time / 1000) + "\n";
+
+			filewriter.fileprinter(timeStirng + "", "with_lib_incrGC_1000_milli");
 
 		}
-		System.out.println("Maximum Execution Time: " + (max) + " ms");
-		System.out.println("Average Execution Time: " + (sum / n) + " ms");
+		System.out.println("Maximum Execution Time: " + ((double) max / 1000) + " ms");
+		System.out.println("Average Execution Time: " + ((double) sum / n / 1000) + " ms");
 	}
 
 	static void fft(Complex[] a, Complex[] A) {

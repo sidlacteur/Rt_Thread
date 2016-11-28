@@ -1,19 +1,19 @@
 package Test;
 
 import Printer.FilePrinter;
-import RtMgrpackage.RtMgr;
+import period.PeriodJNI;
 
 /**
  * JavaWorld: Real-time Java Application Development For Multi-core Systems.
  * This code is public domain.
  */
-public class TestWithLibWithOutGC {
+public class Test {
 
 	static final int LOG2_N = 14;
 	static final int N = 1 << LOG2_N;
 	static final int K = 1000; // Number of frames.
 
-	public TestWithLibWithOutGC() {
+	public Test(String nom1, String nom2) {
 
 		Complex[][] frames = new Complex[K][N];
 		Complex[][] results = new Complex[K][N];
@@ -23,31 +23,30 @@ public class TestWithLibWithOutGC {
 			}
 		}
 		FilePrinter filewriter = new FilePrinter();
-		long max = 0, sum = 0;
-		int unittime = 2;
-		String timeStirng = "";
+		FilePrinter filewriter1 = new FilePrinter();
+		// long max = 0, sum = 0;
 		final int n = 1000;
+		String timeStirng = "";
+		String timeStirng1 = "";
+		int unittime = 2;
 		for (int i = 0; i < n; i++) {
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} // To limit garbage flow.
-			long time = RtMgr.getExactClockTime(unittime);
-			fft(frames[i % K], results[i % K]);
-			time = RtMgr.getSubOfTime(RtMgr.getExactClockTime(unittime), time);
 
-			if (time > max) {
-				max = time;
-			}
-			sum = RtMgr.getAddOfTime(sum, time);
+			long time = PeriodJNI.getExactClockTime(unittime);
+			long time1 = PeriodJNI.getClockTime(unittime);
+			
+			fft(frames[i % K], results[i % K]);
+
+			time = PeriodJNI.timesub(PeriodJNI.getExactClockTime(unittime), time, unittime);
+			time1 = PeriodJNI.timesub(PeriodJNI.getClockTime(unittime), time1, unittime);
 
 			timeStirng += ((double) time / 1000) + "\n";
+			timeStirng1 += ((double) time1 / 1000) + "\n";
 
-			filewriter.fileprinter(timeStirng + "", "with_lib_woutGC_1000");
 		}
-		System.out.println("Maximum Execution Time: " + ((double) max / 1000) + " ms");
-		System.out.println("Average Execution Time: " + ((double) sum / n / 1000) + " ms");
+
+		filewriter.fileprinter(timeStirng1 + "", nom1);
+		filewriter1.fileprinter(timeStirng + "", nom2);
+
 	}
 
 	static void fft(Complex[] a, Complex[] A) {

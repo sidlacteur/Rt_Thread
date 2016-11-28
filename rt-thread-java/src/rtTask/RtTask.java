@@ -40,7 +40,7 @@ public class RtTask extends Thread {
 		long AbsolutBegin = RtMgr.getClockTime(uniteTime);
 		/******************************************************************************/
 
-		int iteration = 10;
+		int iteration = 1;
 		long periodForEachThread;
 
 		long executionTime;
@@ -66,9 +66,9 @@ public class RtTask extends Thread {
 
 			executionTime = RtMgr.getSubOfTime(end, begin);
 
-			RtMgr.endOfInstance(next);
+			RtMgr.endOfInstance(next, uniteTime);
 
-			if (RtMgr.getComparOfDL((long) periodForEachThread, executionTime) == -1) {
+			if (RtMgr.getComparOfDL((long) periodForEachThread, executionTime, uniteTime) == -1) {
 				compt++;
 			}
 

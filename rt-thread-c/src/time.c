@@ -18,11 +18,13 @@
 #include "comptime.h"
 
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_comDeadline(JNIEnv *env,
-		jobject o, jlong dl, jlong exec) {
-	tspec t, t2;
-	t = tspec_from(dl, 1);
+		jobject o, jlong dl, jlong exec,jint unit) {
 
-	t2 = tspec_from(exec, unite);
+	tspec t, t2;
+
+	t = tspec_from(dl, unit);
+
+	t2 = tspec_from(exec, unit);
 
 	/*add period to next */
 	jlong ret = tspec_cmp(&t, &t2);
@@ -42,37 +44,37 @@ JNIEXPORT jlong JNICALL Java_period_PeriodJNI_getClockTime(JNIEnv *env,
 }
 
 JNIEXPORT void JNICALL Java_period_PeriodJNI_endInstance(JNIEnv *env,
-		jobject o, jlong i) {
-	mysleep_ms(i);
+		jobject o, jlong i,jint unit) {
+	mysleep_ms(i,unit);
 }
 
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_timeadd(JNIEnv *env, jobject o,
-		jlong exec, jlong period) {
+		jlong exec, jlong period,jint unittime) {
 
 	/*Convert period and next from long to tspec  struct */
 	tspec t, t2;
-	t = tspec_from(exec, unite);
+	t = tspec_from(exec, unittime);
 
-	t2 = tspec_from(period, 1);
+	t2 = tspec_from(period, unittime);
 
 	/*add period to next */
 	t = tspec_add(&t, &t2);
 
 	/*return additinal time in long type*/
-	return tspec_to(&t, unite);
+	return tspec_to(&t, unittime);
 }
 
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_timesub(JNIEnv *env, jobject o,
-		jlong period1, jlong period2) {
+		jlong period1, jlong period2, jint unittime) {
 	/*Convert period and next from long to tspec  struct */
 	tspec t, t2;
-	t = tspec_from(period1, unite);
+	t = tspec_from(period1, unittime);
 
-	t2 = tspec_from(period2, unite);
+	t2 = tspec_from(period2, unittime);
 
 	/*add period to next */
 	t = tspec_sub(&t, &t2);
 
 	/*return additinal time in long type*/
-	return tspec_to(&t, unite);
+	return tspec_to(&t, unittime);
 }

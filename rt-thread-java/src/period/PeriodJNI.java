@@ -12,14 +12,16 @@ public class PeriodJNI {
 
 	/***** Native Method *************/
 
-	public static native synchronized long comDeadline(long i, long k);
+	public static native synchronized long comDeadline(long i, long k, int unit);
 
+	public static native synchronized long getExactClockTime(int time);
+	
 	public static native synchronized long getClockTime(int time);
 
-	public static native synchronized void endInstance(long milisec);
+	public static native synchronized void endInstance(long milisec,int unit);
 
-	public static native synchronized long timeadd(long tspec, long getPeriod);
+	public static native synchronized long timeadd(long tspec, long getPeriod, int time);
 
-	public static native synchronized long timesub(long tspec, long getPeriod);
+	public static native synchronized long timesub(long tspec, long getPeriod, int time);
 
 }

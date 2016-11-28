@@ -2,7 +2,8 @@ package ThreadTest;
 
 import RtMgrpackage.RtMgr;
 import RtThread.RtJNI;
-import Test.TestWithLibWithOutArgs;
+import Test.Test;
+import Test.TestWithLibWithIncrGC;
 
 public class ThreadTest extends Thread {
 
@@ -21,9 +22,8 @@ public class ThreadTest extends Thread {
 		/**
 		 * put here your code to execute it.
 		 */
-
-		new TestWithLibWithOutArgs();
-
+		new Test("std-rt-k-1000-noint-resp","std-rt-k-1000-noint-exec");
+		
 
 		/**
 		 * if curent thread is in the map, returns scheduling parameters

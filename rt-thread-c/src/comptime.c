@@ -24,7 +24,7 @@ const struct unit_conv conv_table[] = { { 1, 1000000000 },  // SEC
  Given a timespec, converts to a long according to unit.
  */
 long tspec_to(const tspec *t, int unit) {
-	long tu;
+	 long tu;
 
 	tu = (t->tv_sec) * conv_table[unit].mul;
 
@@ -65,10 +65,11 @@ long gettimeThread(int unit) {
 	clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t);
 	return tspec_to(&t, unit);
 }
-void mysleep_ms(long nsec) {
+
+void mysleep_ms(long nsec,int unit) {
 	tspec t;
 
-	t = tspec_from(nsec, unite);
+	t = tspec_from(nsec, unit);
 	clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &t, NULL);
 }
 

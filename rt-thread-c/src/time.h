@@ -17,6 +17,6 @@
 long gettime(int unit);
 
 
-void mysleep_ms(long milisec);
+void mysleep_ms(long milisec,int unit);
 
 #endif /* TIME_H_ */

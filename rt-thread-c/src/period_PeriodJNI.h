@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     period_PeriodJNI
  * Method:    comDeadline
- * Signature: (JJ)J
+ * Signature: (JJI)J
  */
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_comDeadline
-  (JNIEnv *, jclass, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong, jint);
 
 /*
  * Class:     period_PeriodJNI
@@ -34,26 +34,26 @@ JNIEXPORT jlong JNICALL Java_period_PeriodJNI_getClockTime
 /*
  * Class:     period_PeriodJNI
  * Method:    endInstance
- * Signature: (J)V
+ * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_period_PeriodJNI_endInstance
-  (JNIEnv *, jclass, jlong);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     period_PeriodJNI
  * Method:    timeadd
- * Signature: (JJ)J
+ * Signature: (JJI)J
  */
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_timeadd
-  (JNIEnv *, jclass, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong, jint);
 
 /*
  * Class:     period_PeriodJNI
  * Method:    timesub
- * Signature: (JJ)J
+ * Signature: (JJI)J
  */
 JNIEXPORT jlong JNICALL Java_period_PeriodJNI_timesub
-  (JNIEnv *, jclass, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong, jint);
 
 #ifdef __cplusplus
 }

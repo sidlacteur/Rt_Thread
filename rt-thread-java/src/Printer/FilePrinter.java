@@ -8,7 +8,7 @@ public class FilePrinter {
 
 		try {
 			PrintWriter writer = new PrintWriter(
-					"../data_" + name + ".txt", "UTF-8");
+					"/home/emeraude/workspace_tempo/" + name + ".txt", "UTF-8");
 			writer.println(d);
 			writer.println("");
 			writer.close();
