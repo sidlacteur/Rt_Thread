@@ -8,14 +8,9 @@
 #ifndef TIME_H_
 #define TIME_H_
 
-
-
-
-
-
-
 long gettime(int unit);
 
+void set_last_reader();
 
 void mysleep_ms(long milisec,int unit);
 

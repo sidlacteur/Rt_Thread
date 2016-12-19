@@ -1,11 +1,14 @@
 package rtTask;
 
 import RtMgrpackage.RtMgr;
-import Test.TestWithLibWithIncrGC;
+import Test.Test;
 
 public class RtTask extends Thread {
 	int period;
 	int deadline;
+	String resp;
+	String exec;
+	int iteration;
 
 	public int getDeadline() {
 		return deadline;
@@ -23,9 +26,12 @@ public class RtTask extends Thread {
 		this.period = period;
 	}
 
-	public RtTask(int period, int deadline) {
+	public RtTask(int period, int deadline, String resp, String exec, int iter) {
 		this.period = period;
 		this.deadline = deadline;
+		this.resp = resp;
+		this.exec = exec;
+		this.iteration = iter;
 	}
 
 	@Override
@@ -37,10 +43,10 @@ public class RtTask extends Thread {
 
 		/******************************************************************************/
 		int uniteTime = 1;
-		long AbsolutBegin = RtMgr.getClockTime(uniteTime);
+		// long AbsolutBegin = PeriodJNI.getExactClockTime(uniteTime);
+		RtMgr.TimerStart();
 		/******************************************************************************/
 
-		int iteration = 1;
 		long periodForEachThread;
 
 		long executionTime;
@@ -49,26 +55,26 @@ public class RtTask extends Thread {
 		int compt = 0;
 		int it = 0;
 
-		long begin = RtMgr.getClockTime(uniteTime);
+		long begin = RtMgr.getExactClockTime(uniteTime);
 		long end;
-		while (iteration > 0) {
-			System.out.println("Iteration " + iteration + " of thread " + this.getId());
-			begin = RtMgr.getClockTime(uniteTime);
-			long next = RtMgr.getAddOfTime(begin, periodForEachThread);
+		while (this.iteration > 0) {
+
+			begin = RtMgr.getExactClockTime(uniteTime);
+			long next = begin + periodForEachThread;
 
 			/**
 			 * put here your code execution
 			 */
-			new TestWithLibWithIncrGC();
 
-			end = RtMgr.getClockTime(uniteTime);
-			end = RtMgr.getSubOfTime(end, AbsolutBegin);
+			new Test(resp + iteration, exec + iteration);
 
-			executionTime = RtMgr.getSubOfTime(end, begin);
+			end = RtMgr.getExactClockTime(uniteTime);
+
+			executionTime = end - begin;
 
 			RtMgr.endOfInstance(next, uniteTime);
 
-			if (RtMgr.getComparOfDL((long) periodForEachThread, executionTime, uniteTime) == -1) {
+			if (periodForEachThread < executionTime) {
 				compt++;
 			}
 
@@ -78,5 +84,4 @@ public class RtTask extends Thread {
 		}
 		System.out.println("Thread who's Stranded deadline = " + compt + " in " + it + " iteration");
 	}
-
 }

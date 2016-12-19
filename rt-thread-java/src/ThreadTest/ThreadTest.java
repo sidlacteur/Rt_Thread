@@ -3,28 +3,29 @@ package ThreadTest;
 import RtMgrpackage.RtMgr;
 import RtThread.RtJNI;
 import Test.Test;
-import Test.TestWithLibWithIncrGC;
 
 public class ThreadTest extends Thread {
 
 	int index;
+	String resp;
+	String exec;
 
-	public ThreadTest(int x) {
+	public ThreadTest(int x, String respi, String execi) {
 		super();
 		index = x;
+		resp = respi;
+		exec = execi;
+
 	}
 
 	public void run() {
-		/*
-		 * for (int i = 0; i < 10; i++) { Thread.sleep(1000);}
-		 */
 
 		/**
 		 * put here your code to execute it.
 		 */
-		new Test("std-rt-k-1000-noint-resp","std-rt-k-1000-noint-exec");
-		
-
+		for (int i = 0; i < 10; i++) {
+			new Test(resp + i, exec + i);
+		}
 		/**
 		 * if curent thread is in the map, returns scheduling parameters
 		 */

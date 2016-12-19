@@ -20,8 +20,7 @@ public class PeriodJNI {
 
 	public static native synchronized void endInstance(long milisec,int unit);
 
-	public static native synchronized long timeadd(long tspec, long getPeriod, int time);
-
-	public static native synchronized long timesub(long tspec, long getPeriod, int time);
+	public static native synchronized void TimerStart();
+	
 
 }

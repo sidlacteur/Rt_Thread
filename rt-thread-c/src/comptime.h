@@ -21,10 +21,10 @@ typedef struct timespec tspec;
 
 void tspec_init();
 /**     Returns the reference time */
-tspec tspec_get_ref();
 
 /**     Returns the current time from the reference, in unit     */
 
+void set_last_reader();
 
 long tspec_to(const tspec *t, int unit);
 
@@ -41,5 +41,8 @@ long gettime(int unit);
 long gettimeThread(int unit);
 
 void mysleep_ms(long milisec,int unit);
+
+tspec get_last_reader();
+
 
 #endif /* COMPTIME_H_ */

@@ -135,16 +135,12 @@ public class RtMgr {
 		return PeriodJNI.getExactClockTime(unitTime);
 	}
 
-	public synchronized static long getSubOfTime(long time1, long time2) {
-		return PeriodJNI.timesub(time1, time2, 1);
-	}
-
-	public synchronized static long getAddOfTime(long time1, long time2) {
-		return PeriodJNI.timeadd(time1, time2, 1);
-	}
-
 	public synchronized static void endOfInstance(long next, int unit) {
 		PeriodJNI.endInstance(next, unit);
+	}
+
+	public synchronized static void TimerStart() {
+		PeriodJNI.TimerStart();
 	}
 
 	public synchronized static long getComparOfDL(long time1, long time2, int unit) {

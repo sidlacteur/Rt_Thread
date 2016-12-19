@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 struct unit_conv {
 	long mul;
 	long div;
@@ -19,6 +20,12 @@ const struct unit_conv conv_table[] = { { 1, 1000000000 },  // SEC
 		{ 1000000, 1000 },  // MICRO
 		{ 1000000000, 1 }   // NANO
 };
+
+
+
+static __thread tspec last_read;
+
+
 
 /**
  Given a timespec, converts to a long according to unit.
@@ -37,6 +44,19 @@ long tspec_to(const tspec *t, int unit) {
  Given a long integer, expressed as unit, converts it into a
  timespec.
  */
+
+
+void set_last_read(){
+
+	clock_gettime(CLOCK_REALTIME, &last_read);
+
+}
+
+tspec get_last_reader(){
+
+	return last_read;
+}
+
 tspec tspec_from(long tu, int unit) {
 	tspec t;
 
@@ -52,23 +72,10 @@ tspec tspec_from(long tu, int unit) {
 /**
  Given a timespec, converts to a long according to unit.
  */
-long gettime(int unit) {
 
-	tspec t;
-	clock_gettime(CLOCK_REALTIME, &t);
-	return tspec_to(&t, unit);
-}
-
-long gettimeThread(int unit) {
-
-	tspec t;
-	clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t);
-	return tspec_to(&t, unit);
-}
 
 void mysleep_ms(long nsec,int unit) {
 	tspec t;
-
 	t = tspec_from(nsec, unit);
 	clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &t, NULL);
 }
@@ -113,4 +120,22 @@ tspec tspec_sub(const tspec *a, const tspec *b) {
 		d.tv_sec -= 1;
 	}
 	return d;   //tspec_to(&d, unit);
+}
+
+/***********************************************/
+
+long gettime(int unit) {
+
+	tspec t;
+	clock_gettime(CLOCK_REALTIME, &t);
+	t=tspec_sub(&t,&last_read);
+	return tspec_to(&t, unit);
+}
+
+long gettimeThread(int unit) {
+
+	tspec t;
+	clock_gettime(CLOCK_THREAD_CPUTIME_ID, &t);
+	t=tspec_sub(&t,&last_read);
+	return tspec_to(&t, unit);
 }

@@ -41,19 +41,11 @@ JNIEXPORT void JNICALL Java_period_PeriodJNI_endInstance
 
 /*
  * Class:     period_PeriodJNI
- * Method:    timeadd
- * Signature: (JJI)J
+ * Method:    TimerStart
+ * Signature: ()V
  */
-JNIEXPORT jlong JNICALL Java_period_PeriodJNI_timeadd
-  (JNIEnv *, jclass, jlong, jlong, jint);
-
-/*
- * Class:     period_PeriodJNI
- * Method:    timesub
- * Signature: (JJI)J
- */
-JNIEXPORT jlong JNICALL Java_period_PeriodJNI_timesub
-  (JNIEnv *, jclass, jlong, jlong, jint);
+JNIEXPORT void JNICALL Java_period_PeriodJNI_TimerStart
+  (JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }

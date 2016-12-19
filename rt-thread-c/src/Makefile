@@ -6,10 +6,12 @@ LDFLAGS = -lpthread
 
 all : libJNITest.so libTimeJNI.so
 
-libTimeJNI.so : comptime.o time.o
+libTimeJNI.so : comptime.o period_PeriodJNI.o
 	$(CC) $(LDFLAGS) $^ -shared -o $@ 
+	
 
-libJNITest.so : RtThread.o 
+
+libJNITest.so : RtThread_RtThread.o 
 	$(CC) $(LDFLAGS) $^ -shared -o $@ 
 
 %.o : %.c

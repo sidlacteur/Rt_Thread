@@ -3,6 +3,33 @@ package Test;
 import Printer.FilePrinter;
 import period.PeriodJNI;
 
+class TimeSpec {
+
+	public enum Unit {
+		second, milli, micro, nano
+	};
+
+	public long sec;
+	public long nano;
+
+	public void add(TimeSpec s) {
+
+	}
+
+	public void subs(TimeSpec s) {
+
+	}
+
+	public void from(double t, Unit unit) {
+
+	}
+
+	public double to(Unit unit) {
+		return 0;
+	}
+
+}
+
 /**
  * JavaWorld: Real-time Java Application Development For Multi-core Systems.
  * This code is public domain.
@@ -31,13 +58,22 @@ public class Test {
 		int unittime = 2;
 		for (int i = 0; i < n; i++) {
 
+			// TimeSpec time_spec1 = new TimeSpec();
+			// TimeSpec time_spec2 = new TimeSpec();
+
 			long time = PeriodJNI.getExactClockTime(unittime);
 			long time1 = PeriodJNI.getClockTime(unittime);
-			
+
 			fft(frames[i % K], results[i % K]);
 
-			time = PeriodJNI.timesub(PeriodJNI.getExactClockTime(unittime), time, unittime);
-			time1 = PeriodJNI.timesub(PeriodJNI.getClockTime(unittime), time1, unittime);
+			// time = PeriodJNI.timesub(PeriodJNI.getExactClockTime(unittime),
+			// time, unittime);
+
+			time1 = PeriodJNI.getClockTime(unittime) - time1;
+			time = PeriodJNI.getExactClockTime(unittime) - time;
+
+			// time1 = PeriodJNI.timesub(PeriodJNI.getClockTime(unittime),
+			// time1, unittime);
 
 			timeStirng += ((double) time / 1000) + "\n";
 			timeStirng1 += ((double) time1 / 1000) + "\n";

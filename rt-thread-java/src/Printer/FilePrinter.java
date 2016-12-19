@@ -7,8 +7,7 @@ public class FilePrinter {
 	public void fileprinter(String d, String name) {
 
 		try {
-			PrintWriter writer = new PrintWriter(
-					"/home/emeraude/workspace_tempo/" + name + ".txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("/home/emeraude/Dropbox/TravailStage2016/data_java/"+name + ".txt", "UTF-8");
 			writer.println(d);
 			writer.println("");
 			writer.close();
